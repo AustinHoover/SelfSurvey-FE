@@ -1,6 +1,6 @@
 import * as React from "react";
 import { APIURL, appContext } from "../../entry/app";
-import { createActionAddQuestion, createActionAddSurvey, createActionSetSurveyList } from "../../state/actions";
+import { createActionSetSurveyList } from "../../state/actions";
 import { Question, Survey } from "../../state/interface";
 import QuestionEdit from "../../components/QuestionEdit/QuestionEdit";
 import DefaultNavbar from "../../components/DefaultNavbar/DefaultNavbar";

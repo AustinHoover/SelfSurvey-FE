@@ -1,10 +1,10 @@
 import * as React from "react";
 import { APIURL, appContext } from "../../entry/app";
-import { createActionAddQuestion, createActionAddSurvey } from "../../state/actions";
 import { Question, ResponseValue, Survey } from "../../state/interface";
 import QuestionEdit from "../../components/QuestionEdit/QuestionEdit";
 import DefaultNavbar from "../../components/DefaultNavbar/DefaultNavbar";
 import QuestionInput from "../../components/QuestionInput/QuestionInput";
+import { useNavigate } from "react-router";
 
 
 const TakeSurvey = () => {
@@ -12,6 +12,9 @@ const TakeSurvey = () => {
     const appStateContext = React.useContext(appContext);
     const state = appStateContext.state
     const dispatch = appStateContext.dispatch
+
+    //navigate control
+    const navigate = useNavigate();
 
 
     const [surveyInstanceState, setSurveyInstanceState] = React.useState<any>({})
@@ -55,6 +58,7 @@ const TakeSurvey = () => {
             .then(resp => resp.text())
             .then(resp => {
                 console.log(resp)
+                navigate("/")
             })
             .catch(err => console.log(err))
         })

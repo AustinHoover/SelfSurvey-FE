@@ -1,16 +1,17 @@
 import * as React from "react";
 import DefaultNavbar from "../../components/DefaultNavbar/DefaultNavbar";
+import { APIURL } from "../../entry/app";
 
 const InfoScreen = () => {
 
     let surveys: any = []
-    fetch("http://localhost:8080/survey/list")
+    fetch(APIURL + "/survey/list")
     .then(resp => resp.json())
     .then(resp => surveys = resp)
     .catch(err => console.log(err))
 
     let testMessage: any = null
-    fetch("http://localhost:8080/hello")
+    fetch(APIURL + "/hello")
     .then(resp => resp.text())
     .then(resp => testMessage = resp)
     .catch(err => console.log(err))
@@ -50,28 +51,3 @@ const InfoScreen = () => {
 }
 
 export default InfoScreen
-
-// const styles = StyleSheet.create({
-//     container: {
-//       marginTop: 50,
-//     },
-//     navButton: {
-//       backgroundColor: 'blue',
-//       alignItems: 'center',
-//       margin: 25,
-//       paddingTop: 10,
-//       paddingBottom: 10,
-//     },
-//     navButtonDisabled: {
-//       backgroundColor: 'gray',
-//       alignItems: 'center',
-//       margin: 25,
-//       paddingTop: 10,
-//       paddingBottom: 10,
-//     },
-//     navButtonText: {
-//       color: 'white',
-//       fontWeight: 'bold',
-//       fontSize: 30,
-//     }
-//   });

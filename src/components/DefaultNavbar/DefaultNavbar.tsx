@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { appContext } from "../../entry/app";
 
 interface NavEntry {
     name : string,
@@ -40,6 +41,19 @@ export interface DefaultNavbarProps {
 }
 
 const DefaultNavbar = (props : DefaultNavbarProps) => {
+    //get context
+    const appStateContext = React.useContext(appContext);
+    const state = appStateContext.state
+    const dispatch = appStateContext.dispatch
+
+
+    //fast return if we aren't logged in yet don't show randoms the navbar
+    if(!state.loggedIn){
+        return <div></div>
+    }
+
+
+    //actual nav items logic
     let NavItems : JSX.Element[] = [];
     entries.forEach((el)=>{
         if(el.external){
@@ -85,16 +99,12 @@ const DefaultNavbar = (props : DefaultNavbarProps) => {
     });
     return (
         <div className="navbar navbar-expand-lg navbar-light">
-            <div className="container-fluid">
-                <div className="navbar-header">
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                </div>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <div className="navbar-nav mr-auto">
-                        {NavItems}
-                    </div>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <div className="navbar-nav mr-auto">
+                    {NavItems}
                 </div>
             </div>
         </div>

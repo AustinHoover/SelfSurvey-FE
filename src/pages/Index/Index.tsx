@@ -2,8 +2,9 @@ import * as React from "react";
 import DefaultNavbar from "../../components/DefaultNavbar/DefaultNavbar";
 import { FormEvent, FormEventHandler } from "react";
 import { APIURL, appContext } from "../../entry/app";
-import { createActionSetSurveyList } from "../../state/actions";
+import { createActionLogin, createActionSetSurveyList } from "../../state/actions";
 import { dummySurvey } from "../../state/interface";
+import { Link } from "react-router-dom";
 
 /**
  * Index page
@@ -22,7 +23,12 @@ const Index = () => {
     const loginBoxElements: JSX.Element[] = []
     if(state.loggedIn){
         loginBoxElements.push(
-            <div></div>
+            <Link
+            style={{
+                fontSize: "30px",
+            }}
+            to={"/survey"}
+            >Ready to take a survey!</Link>
         )
     } else {
         const loginFunc = (event: FormEvent) => {
@@ -45,6 +51,7 @@ const Index = () => {
                 .then(resp => {
                     console.log(resp)
                     dispatch(createActionSetSurveyList(resp))
+                    dispatch(createActionLogin(true))
                 })
                 .catch(err => console.log(err))
             })
@@ -56,22 +63,27 @@ const Index = () => {
                 loginFunc(event)
             }}
             >
-                <div>
+                <div className="form-group">
+                    <label htmlFor="username">Username</label>
                     <input
                     type="text"
                     id="username"
+                    className="form-control m-4"
                     onChange={(event) => setUsername(event.target.value)}
                     ></input>
                 </div>
-                <div>
+                <div className="form-group">
+                    <label htmlFor="password">Password</label>
                     <input
                     type="password"
                     id="password"
+                    className="form-control m-4"
                     onChange={(event) => setPassword(event.target.value)}
                     ></input>
                 </div>
                 <div>
                     <button
+                    className="btn btn-primary"
                     >Login</button>
                 </div>
             </form>
@@ -103,11 +115,9 @@ const Index = () => {
                                 <p className="display-4">
                                     How are you feeling today?
                                 </p>
+                                {loginBoxElements}
                                 {/* <img className="card-img-top text-light" src="" alt="There was supposed to be a picture of my face here"></img> */}
                             </div>
-                        </div>
-                        <div className="row">
-                            {loginBoxElements}
                         </div>
                     </div>
                 </main>

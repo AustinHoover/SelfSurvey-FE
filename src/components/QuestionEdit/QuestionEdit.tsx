@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Question, Survey } from "../../state/interface";
 import { APIURL, appContext } from "../../entry/app";
-import { createActionQuestionPromptChange, createActionRemoveQuestion, createActionSetSurveyList } from "../../state/actions";
+import { createActionSetSurveyList } from "../../state/actions";
 
 /**
  * Props
